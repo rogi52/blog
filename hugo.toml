@@ -5,6 +5,3 @@ theme = 'PaperMod'
 
 relativeURLs = false
 canonifyURLs = true
-
-[params]
-  mainSections = ["posts"]
