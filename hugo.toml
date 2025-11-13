@@ -5,3 +5,11 @@ theme = 'PaperMod'
 
 relativeURLs = false
 canonifyURLs = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  math = true
