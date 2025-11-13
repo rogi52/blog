@@ -22,7 +22,7 @@ jobs:
           hugo-version: 'latest'
 
       # Hugo サイトをビルド
-      - run: hugo --minify --config hugo.toml
+      - run: hugo --minify --config hugo.toml --baseURL 'https://rogi52.github.io/blog/'
 
       # public ディレクトリを gh-pages ブランチにデプロイ
       - uses: peaceiris/actions-gh-pages@v3
