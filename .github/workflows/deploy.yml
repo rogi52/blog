@@ -24,6 +24,9 @@ jobs:
       # Hugo サイトをビルド
       - run: hugo --minify --config hugo.toml --baseURL 'https://rogi52.github.io/blog/'
 
+      # public ディレクトリの中身を確認
+      - run: ls -R ./public
+
       # public ディレクトリを gh-pages ブランチにデプロイ
       - uses: peaceiris/actions-gh-pages@v3
         with:
