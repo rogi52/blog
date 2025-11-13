@@ -1,7 +1,7 @@
 +++
 date = '2025-11-14T00:12:31+09:00'
 draft = false
-title = 'Math Test'
+title = 'Math Test: 数式直角'
 math = true
 +++
 
