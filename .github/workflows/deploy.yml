@@ -3,32 +3,29 @@ name: Deploy Hugo site to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main  # main ブランチに push したら自動実行
 
 permissions:
-  contents: write
+  contents: write  # GitHub Pages に push する権限
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: false
-          fetch-depth: 0
+      # ソースをチェックアウト
+      - uses: actions/checkout@v4
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
+      # Hugo をセットアップ
+      - uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
 
-      - name: Build site
-        run: hugo --minify --config hugo.toml
+      # Hugo サイトをビルド
+      - run: hugo --minify --config hugo.toml
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      # public ディレクトリを gh-pages ブランチにデプロイ
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
