@@ -4,3 +4,4 @@ title = 'My New Hugo Site'
 theme = 'PaperMod'
 
 relativeURLs = false
+canonifyURLs = true
