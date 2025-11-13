@@ -2,3 +2,5 @@ baseURL = 'https://rogi52.github.io/blog/'
 languageCode = 'ja'
 title = 'My New Hugo Site'
 theme = 'PaperMod'
+
+relativeURLs = false
