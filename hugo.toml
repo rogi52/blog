@@ -1,6 +1,4 @@
 baseURL = 'https://rogi52.github.io/blog/'
-languageCode = 'en-us'
+languageCode = 'ja'
 title = 'My New Hugo Site'
 theme = 'PaperMod'
-relativeURLs = true
-canonifyURLs = true
