@@ -14,3 +14,4 @@ canonifyURLs = true
 [params]
   mainSections = ["posts"]
   math = true
+  customCSS = ["css/custom.css"]
