@@ -5,6 +5,9 @@ hasCJKLanguage = true
 title = 'rogi52'
 theme = 'hugo-theme-stack'
 
+[social]
+  twitter = "rogi_52"
+
 [params]
   mainSections = ["posts"]
   math = true
@@ -20,6 +23,10 @@ theme = 'hugo-theme-stack'
     [params.dateFormat]
         published = "2006年01月02日"
         lastUpdated = "2006年01月02日"
+  
+  images = ["images/star.jpg"]
+    [params.opengraph.twitter]
+        card = "summary_large_image"
 
 [menu]
   [[menu.social]]
