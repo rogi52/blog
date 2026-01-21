@@ -1,0 +1,44 @@
+baseURL = 'https://rogi52.github.io/blog/'
+languageCode = 'ja'
+DefaultContentLanguage = "ja"
+hasCJKLanguage = true
+title = 'rogi52'
+theme = 'hugo-theme-stack'
+
+[params]
+  mainSections = ["posts"]
+  math = true
+
+    [params.sidebar.avatar]
+        enabled = true
+        local = true
+        # src = "images/icon_sd_saitama_thumb.jpg"
+
+    [params.article]
+        readingTime = false
+
+    [params.dateFormat]
+        published = "2006年01月02日"
+        lastUpdated = "2006年01月02日"
+
+[menu]
+  [[menu.social]]
+    identifier = "github"
+    name = "GitHub"
+    url = "https://github.com/rogi52"
+    params = { icon = "brand-github" }
+
+  [[menu.social]]
+    identifier = "twitter"
+    name = "Twitter"
+    url = "https://twitter.com/rogi_52"
+    params = { icon = "brand-twitter" }
+
+enableGitInfo = true
+
+[frontmatter]
+    date = ["date", "publishDate", "lastmod", ":fileModTime"]
+    lastmod = [":git", ":fileModTime", "lastmod", "date"]
+
+[markup.goldmark.renderer]
+  unsafe = true
