@@ -12,7 +12,7 @@ theme = 'hugo-theme-stack'
     [params.sidebar.avatar]
         enabled = true
         local = true
-        # src = "images/icon_sd_saitama_thumb.jpg"
+        src = "images/star.jpg"
 
     [params.article]
         readingTime = false
