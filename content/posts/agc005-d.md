@@ -46,7 +46,7 @@ $$ [x^A] \bigl( F_{n_1}(x) \bigr)^{c_1} \bigl( F_{n_2}(x) \bigr)^{c_2} $$
 
 
 ### 計算量
-+ $F_{n}(x)$ は，二項係数を前計算しておくことで $O(n)$ 時間で計算できます．
++ $F_{n}(x)$ は，二項係数を前計算しておくことで $O(N)$ 時間で計算できます．
 + $\bigl( F_{n}(x) \bigr)^{c}$ は，[FPS の pow](https://judge.yosupo.jp/problem/pow_of_formal_power_series) を使うことで $O(N \log N)$ 時間で計算できます．
 + $2$ つの多項式を FFT で掛け合わせれば $O(N \log N)$ 時間です．
 
