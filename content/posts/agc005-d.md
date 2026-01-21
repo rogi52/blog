@@ -38,7 +38,7 @@ $$ F_n(x) \coloneqq \sum_i \binom{n-i}{i}  x^i $$
 ### グラフ全体
 パスグラフの頂点数としてあり得るのは，$\left\lfloor \frac{N}{K} \right\rfloor$ または $\left\lceil \frac{N}{K} \right\rceil$ です．
 これらを $n_1, n_2$ とし，それぞれのパスグラフの個数を $c_1, c_2$ とします
-（$N$ が $K$ で割り切れるときは，例えば $c_1 = N/K$，$c_2 = 0$ とすれば良いです）．
+（$N$ が $K$ で割り切れるときは，例えば $c_1 = 2K$，$c_2 = 0$ とすれば良いです）．
 合計 $A$ 本の辺を選ぶ方法の数は，
 $$ [x^A] \bigl( F_{n_1}(x) \bigr)^{c_1} \bigl( F_{n_2}(x) \bigr)^{c_2} $$
 と表せます．
