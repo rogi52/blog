@@ -1,0 +1,6 @@
+<details {{ with .Get "id" }}id="{{ . }}"{{ end }} class="custom-callout box-{{ .Get "color" | default "gray" }}">
+    <summary>{{ .Get "title" | default "詳細を開く" }}</summary>
+    <div>
+        {{ .Inner | markdownify }}
+    </div>
+</details>

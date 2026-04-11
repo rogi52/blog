@@ -2,7 +2,7 @@ baseURL = 'https://rogi52.github.io/blog/'
 languageCode = 'ja'
 DefaultContentLanguage = "ja"
 hasCJKLanguage = true
-title = 'rogi52'
+title = 'Rogi'
 theme = 'hugo-theme-stack'
 
 [social]
@@ -10,23 +10,49 @@ theme = 'hugo-theme-stack'
 
 [params]
   mainSections = ["posts"]
-  math = true
 
-    [params.sidebar.avatar]
-        enabled = true
-        local = true
-        src = "images/star.jpg"
+    [params.sidebar]
+        name = "Rogi"
+        bio = "biioooo"
+        subtitle = "algorithm"
+
+        [params.sidebar.avatar]
+            enabled = true
+            local = true
+            src = "images/mob.png"
 
     [params.article]
         readingTime = false
+        math = true
+        toc = true
 
     [params.dateFormat]
         published = "2006年01月02日"
         lastUpdated = "2006年01月02日"
   
-  images = ["images/star.jpg"]
     [params.opengraph.twitter]
         card = "summary_large_image"
+
+    [[params.widgets.page]]
+        type = "toc"
+
+    [[params.widgets.homepage]]
+        type = "profile"
+
+    # [[params.widgets.homepage]]
+    # type = "archives"
+
+    [[params.widgets.homepage]]
+        type = "categories"
+
+    [[params.widgets.homepage]]
+        type = "tag-cloud"
+
+    [markup.tableOfContents]
+        ordered = true  # 番号付きリストにする
+        startLevel = 2
+        endLevel = 4
+
 
 [menu]
   [[menu.social]]
@@ -49,3 +75,10 @@ enableGitInfo = true
 
 [markup.goldmark.renderer]
   unsafe = true
+
+
+[markup.highlight]
+  codeFences = true
+  guessSyntax = true
+  lineNos = false
+  style = "github"

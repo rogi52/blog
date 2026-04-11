@@ -6,14 +6,6 @@ math = true
 toc = true
 +++
 
-- [概要](#概要)
-- [内容](#内容)
-  - [パスグラフ単体](#パスグラフ単体)
-  - [グラフ全体](#グラフ全体)
-  - [計算量](#計算量)
-- [類題](#類題)
-- [感想](#感想)
-
 ## 概要
 [AGC005 D ~K Perm Counting](https://atcoder.jp/contests/agc005/tasks/agc005_d)
 を $O(N \log N)$ 時間で解く方法を解説します．

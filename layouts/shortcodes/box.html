@@ -1,0 +1,22 @@
+{{ $color := .Get "color" | default "blue" }}
+{{ $prefix := .Get "prefix" }}
+
+{{ if not $prefix }}
+    {{ if eq $color "blue" }}{{ $prefix = "定理" }}{{ end }}
+    {{ if eq $color "purple" }}{{ $prefix = "補題" }}{{ end }}
+    {{ if eq $color "yellow" }}{{ $prefix = "定義" }}{{ end }}
+    {{ if eq $color "green" }}{{ $prefix = "例" }}{{ end }}
+    {{ if eq $color "red" }}{{ $prefix = "注意" }}{{ end }}
+    {{ if eq $color "teal" }}{{ $prefix = "問題" }}{{ end }}
+    {{ if not $prefix }}{{ $prefix = "Note" }}{{ end }}
+{{ end }}
+
+{{ .Page.Scratch.Add (printf "count_%s" $prefix) 1 }}
+{{ $count := .Page.Scratch.Get (printf "count_%s" $prefix) }}
+
+<div {{ with .Get "id" }}id="{{ . }}"{{ end }} class="custom-callout box-{{ $color }}">
+    <strong>【{{ $prefix }} {{ $count }}】{{ with .Get "title" }} {{ . }}{{ end }}</strong>
+    <div>
+        {{ .Inner | markdownify }}
+    </div>
+</div>

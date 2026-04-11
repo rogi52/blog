@@ -1,0 +1,155 @@
+/* 記事本文のフォントサイズを数学・技術ブログ向けに調整 */
+.article-content {
+    font-size: 15px !important;  /* 16pxから15pxに落とす */
+    line-height: 1.75 !important; /* 行間を少し広めにとって可読性を確保 */
+    letter-spacing: 0.02em;      /* ほんの少し文字間を広げると高級感が出ます */
+}
+
+/* ついでに、定理枠の中の文字サイズも本文と揃える */
+.custom-callout > div {
+    font-size: 15px !important;
+}
+
+/* =========================================
+   AtCoder風 カスタムボックス (.custom-callout)
+   ========================================= */
+.custom-callout {
+    /* デフォルトはグレー */
+    --box-color: #777777;
+    --box-bg: rgba(119, 119, 119, 0.05);
+
+    margin: 1.5em 0 !important;
+    border: none !important;
+    border-left: 5px solid var(--box-color) !important;
+    border-radius: 0px !important;
+    /* border-radius: 6px !important; */
+    background-color: var(--box-bg);
+    overflow: hidden; /* タイトルの背景色がはみ出ないようにする */
+}
+
+/* --- タイトル部分（塗りつぶし） --- */
+.custom-callout strong:first-child,
+.custom-callout summary {
+    display: block;
+    margin: 0 !important;
+    padding: 0.25em 0.8em !important; /* ← 上下の余白を減らしてスッキリ（分厚さ解消） */
+    background-color: var(--box-color);
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 1em; /* ← 文字サイズも少し落ち着かせる */
+}
+/* 折り畳み（summary）特有の調整 */
+.custom-callout summary {
+    margin: 0 !important;
+    padding: 0.25em 0.8em !important;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    list-style-position: inside; 
+    transition: filter 0.2s ease; /* ふわっと明るくするためのアニメーション */
+}
+
+/* ⬇︎ summaryにマウスが乗った時、親要素(custom-callout)全体の明るさを変える ⬇︎ */
+.custom-callout:has(summary:hover) {
+    filter: brightness(1.15);
+}
+
+/* --- コンテンツ部分の余白と文字色 --- */
+.custom-callout > div {
+    padding: 0.8em 1em !important; /* ← 中身の余白も少し引き締める */
+    margin: 0 !important;
+    color: #000000 !important; /* ← ライトモード時は真っ黒（数式が読みやすい） */
+}
+
+/* =========================================
+   カラーバリエーション
+   ========================================= */
+.custom-callout.box-blue   { --box-color: #337ab7; --box-bg: rgba(51, 122, 183, 0.05); }
+.custom-callout.box-yellow { --box-color: #f0ad4e; --box-bg: rgba(240, 173, 78, 0.05); }
+.custom-callout.box-green  { --box-color: #5cb85c; --box-bg: rgba(92, 184, 92, 0.05); }
+.custom-callout.box-red    { --box-color: #d9534f; --box-bg: rgba(217, 83, 79, 0.05); }
+.custom-callout.box-purple { --box-color: #8e44ad; --box-bg: rgba(142, 68, 173, 0.05); }
+.custom-callout.box-teal   { --box-color: #009688; --box-bg: rgba(0, 150, 136, 0.05); }
+
+/* =========================================
+   ダークモード時の調整
+   ========================================= */
+[data-scheme="dark"] .custom-callout {
+    /* ダークモードでは少し明るく柔らかい色にして、背景の透明度を上げる */
+    --box-bg: rgba(255, 255, 255, 0.08); 
+}
+[data-scheme="dark"] .custom-callout.box-blue   { --box-color: #4a90e2; --box-bg: rgba(74, 144, 226, 0.15); }
+[data-scheme="dark"] .custom-callout.box-yellow { --box-color: #e6a23c; --box-bg: rgba(230, 162, 60, 0.15); }
+[data-scheme="dark"] .custom-callout.box-green  { --box-color: #67c23a; --box-bg: rgba(103, 194, 58, 0.15); }
+[data-scheme="dark"] .custom-callout.box-red    { --box-color: #f56c6c; --box-bg: rgba(245, 108, 108, 0.15); }
+[data-scheme="dark"] .custom-callout.box-purple { --box-color: #c38ef1; --box-bg: rgba(195, 142, 241, 0.15); }
+[data-scheme="dark"] .custom-callout.box-teal   { --box-color: #4db6ac; --box-bg: rgba(77, 182, 172, 0.15); }
+
+/* ダークモード時の文字色継承 */
+[data-scheme="dark"] .custom-callout > div,
+[data-scheme="dark"] .custom-callout > div * {
+    /* color: #e2e8f0 !important; */
+    color: white !important;
+}
+
+
+/* =========================================
+   URLリンク（青色 ＋ にゅっと出るアニメーション復活）
+   ========================================= */
+
+/* 1. テーマの変数を使って、アニメーションの「色」と「濃さ」を設定 */
+:root {
+    /* ライトモードの青 (Hex: #0066cc を RGB にしたもの) */
+    --link-background-color: 0, 102, 204 !important;
+    --link-background-opacity: 0.15 !important;       /* 通常時の背景の濃さ（うっすら） */
+    --link-background-opacity-hover: 0.4 !important;  /* マウスを乗せた時の濃さ */
+}
+
+[data-scheme="dark"] {
+    /* ダークモードの青 (Hex: #58a6ff を RGB にしたもの) */
+    --link-background-color: 88, 166, 255 !important;
+    --link-background-opacity: 0.15 !important;
+    --link-background-opacity-hover: 0.4 !important;
+}
+
+/* 2. リンクの文字色設定（標準の下線は消して、背景アニメーションに任せる） */
+.article-content a {
+    color: #0066cc !important;
+    text-decoration: none !important; /* 標準の単調な下線は消す */
+}
+
+.article-content a:hover {
+    color: #004499 !important;
+}
+
+/* --- ダークモード時の文字色 --- */
+[data-scheme="dark"] .article-content a {
+    color: #58a6ff !important;
+}
+
+[data-scheme="dark"] .article-content a:hover {
+    color: #a5d6ff !important;
+}
+
+
+/* =========================================
+   インラインコード (`...`) のNotion風デザイン
+   ========================================= */
+
+/* pre（コードブロック）の中ではない code タグだけを対象にする */
+.article-content :not(pre) > code {
+    background-color: rgba(135, 131, 120, 0.15) !important; /* Notion風の薄いグレー */
+    color: #eb5757 !important;                             /* Notion特有の赤茶色 */
+    padding: 0.2em 0.4em !important;
+    border-radius: 3px !important;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+    font-size: 0.85em !important; /* 本文より少し小さくするとNotionっぽくなります */
+    border: none !important;
+    margin: 0 0.2em !important;
+}
+
+/* --- ダークモード時の色調整 --- */
+[data-scheme="dark"] .article-content :not(pre) > code {
+    background-color: rgba(255, 255, 255, 0.1) !important; /* 暗い背景に馴染むグレー */
+    color: #ff7b72 !important;                             /* ダークモードで見やすい明るい赤 */
+}
