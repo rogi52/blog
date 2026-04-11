@@ -77,4 +77,9 @@ $\blacksquare$
 * **標準Markdownリンク:** これは [Googleへのリンク](https://google.com) のテストです。ホバー時に青いアニメーションが出ます。
 * **HTML直書きリンク:** こんにちは <u>下線付きテキスト</u> です。
 
+{{< box color="blue" title="タイトル" id="thm-label" >}}
+hogehogeho
+{{< /box >}}
 
+
+[参照](#thm-cook-levin) で参照できる．
