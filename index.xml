@@ -1,4 +1,101 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Home on Rogi</title><link>https://rogi52.github.io/blog/</link><description>Recent content in Home on Rogi</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sat, 11 Apr 2026 05:21:58 +0000</lastBuildDate><atom:link href="https://rogi52.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>アーカイブ</title><link>https://rogi52.github.io/blog/archives/</link><pubDate>Sat, 11 Apr 2026 05:21:58 +0000</pubDate><guid>https://rogi52.github.io/blog/archives/</guid><description/></item><item><title>AGC005-D ~K Perm Counting $O(N \log N)$ 時間解法</title><link>https://rogi52.github.io/blog/posts/agc005-d/</link><pubDate>Wed, 21 Jan 2026 22:56:00 +0900</pubDate><guid>https://rogi52.github.io/blog/posts/agc005-d/</guid><description>&lt;h2 id="概要"&gt;概要
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Home on Rogi</title><link>https://rogi52.github.io/blog/</link><description>Recent content in Home on Rogi</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Mon, 11 May 2026 16:07:14 +0000</lastBuildDate><atom:link href="https://rogi52.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>アーカイブ</title><link>https://rogi52.github.io/blog/archives/</link><pubDate>Mon, 11 May 2026 16:07:14 +0000</pubDate><guid>https://rogi52.github.io/blog/archives/</guid><description/></item><item><title>$k$-$\mathsf{PATH}$ を $2^k \cdot n^{O(1)}$ 時間で解くアルゴリズムを学ぶ</title><link>https://rogi52.github.io/blog/posts/kpath/</link><pubDate>Thu, 07 May 2026 20:06:30 +0900</pubDate><guid>https://rogi52.github.io/blog/posts/kpath/</guid><description>
+&lt;div id="prob-label"
+class="custom-callout box-teal"
+&gt;
+&lt;strong&gt;【問題】 $k$-$\mathsf{PATH}$&lt;/strong&gt;
+&lt;div&gt;
+$n$ 頂点の単純無向グラフが与えられる．
+$k$ 頂点のパスが存在するか判定せよ．
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;$k$-$\mathsf{PATH}$ 問題を解くアルゴリズムとして Color-Coding&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt; が有名ですが，
+ここでは代数的な手法を用いて高速な $O^*(2^k)$ 時間を達成するアルゴリズム&lt;sup id="fnref:2"&gt;&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref"&gt;2&lt;/a&gt;&lt;/sup&gt; を解説します．&lt;/p&gt;
+&lt;h2 id="アルゴリズム"&gt;アルゴリズム
+&lt;/h2&gt;&lt;p&gt;各頂点 $v$ に値 $x_v$ を割り当てます．
+$$ x_{v} = \sum_{i=1}^{k} r_{v, i} z_i \in \operatorname{GF}(2^l)[z_1, \dots, z_k]/\langle z_1^2, \dots, z_k^2 \rangle$$
+ここで $r_{v, i}$ は $\operatorname{GF}(2^l)$ から一様ランダムに選んだ値です．
+また，無向辺 $\lbrace u, v\rbrace$ を 2 本の有向辺 $(u, v), (v, u)$ として，
+全ての有向辺 $(u, v)$ に重み $w_{u, v} \in \operatorname{GF}(2^l)$ を割り当てます．
+ただし $l = \lceil \log_2(4k) \rceil$ とします．&lt;/p&gt;
+&lt;p&gt;全 $k$-walk の重みの積の総和を考えます．
+$$ S \coloneqq \sum_{(v_1, \dots, v_k) \colon k\text{-walk}} \prod_{i=1}^{k} x_{v_i} \prod_{i=1}^{k-1} w_{v_i, v_{i+1}} $$
+これは DP で高速に計算できます．
+$\operatorname{dp}(v, i) \coloneqq {}$ 頂点 $v$ を端点とする，頂点数 $i$ の walk の重みの積の総和，と定義します．
+$\operatorname{dp}(v, 1) \xleftarrow{} x_{v}$ と初期化した後，
+各辺 $(u, v)$ に対して
+$$ \operatorname{dp}(v, i) \xleftarrow{+} \operatorname{dp}(u, i-1) \cdot x_{v} \cdot w_{u, v} $$ の遷移式に従って計算すれば良いです．
+管理すべき項数は $2^k$ 個なので， 遷移あたり $O^*(2^k)$ 時間です．&lt;/p&gt;
+&lt;div id="claim-label"
+class="custom-callout box-orange"
+&gt;
+&lt;strong&gt;【主張】&lt;/strong&gt;
+&lt;div&gt;
+$k$-path が存在する $\iff$ $[z_1 \cdots z_k]S \neq 0$
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;walk が同じ頂点を通る場合を考えます．
+重み積の中に $x_v^2$ が出てきますが，
+$$
+x_v^2 = \left( \sum_{i=1}^{k} r_{v, i} z_i \right)^2
+= \sum_{i=1}^{k} (r_{v, i} z_i)^2 + \sum_{i &amp;lt; j} 2\,r_{v, i} r_{v, j} z_i z_j = 0
+$$
+最後の等号は $z_i^2 = 0$ と $2\, r_{v, i} r_{v, j} = 0$ よりわかります．
+したがって，自己交差する walk の重みは消えます．&lt;/p&gt;
+&lt;p&gt;一方 walk が同じ頂点を通らない，つまり path の場合，
+使う有向辺の集合が一意に定まるため，他の path と相殺されません．
+さらに，頂点重み部分 $x_{v_1} x_{v_2} \cdots x_{v_k}$ から $z_1 z_2 \cdots z_k$ の項が残ります．&lt;/p&gt;
+&lt;details class="custom-callout box-gray"&gt;
+&lt;summary&gt;辺重みの必要性&lt;/summary&gt;
+&lt;div&gt;
+辺重みをなくし，頂点重みだけで考えてみます．
+パス $(v_1, v_2, \dots, v_k)$ に対して，
+そのパスを反転したパス $(v_k, v_{k-1}, \dots, v_1)$ も全く同じ重みを持つので，
+項がちょうど打ち消し合ってしまい，path を検出できません．
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;p&gt;$[z_1 \cdots z_k]S$ の非 $0$ 判定は， $r$ と $w$ にランダムな値を代入して行います．
+$r$ について $k$ 次，$w$ について $(k-1)$ 次の計 $(2k-1)$ 次多項式なので，
+Schwartz-Zippel の補題より
+$$ \frac{2k - 1}{2^l} &amp;lt; \frac{2k}{4k} = \frac{1}{2} $$
+$l = \lceil \log_2(4k) \rceil$ と設定していました．
+以上で片側誤り確率 $\frac{1}{2}$ 未満のアルゴリズムが完成です．&lt;/p&gt;
+&lt;h2 id="空間計算量の改善"&gt;空間計算量の改善
+&lt;/h2&gt;&lt;p&gt;先ほどの解法では， DP テーブルの各状態で $2^k$ 項を管理する必要があり，指数サイズの空間を必要とします．
+ここでは，包除原理を用いて空間計算量を多項式に落とします．&lt;/p&gt;
+&lt;p&gt;計算に $z_i^2 = 0$ を課さない場合を考えます．
+つまり $S \in \operatorname{GF}(2^l)[z_1, \dots, z_k]$ をそのまま展開したとします．
+自己交差する walk は，高々 $(k-1)$ 種類の頂点しか通らないので，生成される項には必ず欠けた変数 $z_i$ が存在します．
+一方で path は全ての変数を 1 回ずつ使った $z_1 z_2 \cdots z_k$ の項を生成します．&lt;/p&gt;
+&lt;p&gt;したがって，$S$ から $z_1 z_2 \cdots z_k$ の項だけ計算できれば，パスの存在判定ができます．
+$T \subseteq [k]$ に対して，
+$S(T)$ を「$S$ の変数に $i \in T$ なら $z_i = 1$，$i \notin T$ なら $z_i = 0$ を代入した評価値」とすると，求める係数は次のように抽出できます．
+$$ [z_1 \dots z_k] S = \sum_{T \subseteq [k]} (-1)^{k - |T|} S(T) = \sum_{T \subseteq [k]} S(T) $$
+よって $S(T)$ の和を管理する変数を持っておき，
+$0$ と $1$ の割り当て $2^k$ 通りに対して，
+スカラー値（$\operatorname{GF}(2^l)$ の元）で 多項式時間の DP をします．
+時間計算量を $O^*(2^k)$ 時間に保ちつつ，
+空間計算量は， スカラー値を保持する DP テーブルの多項式サイズで済みます．&lt;/p&gt;
+&lt;h2 id="終わりに"&gt;終わりに
+&lt;/h2&gt;&lt;p&gt;自己交差を打ち消すところが上手いですね．&lt;/p&gt;
+&lt;p&gt;さらに指数の底を改善するアルゴリズムもあるようです&lt;sup id="fnref:3"&gt;&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref"&gt;3&lt;/a&gt;&lt;/sup&gt; ．&lt;/p&gt;
+&lt;div class="footnotes" role="doc-endnotes"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Color-Coding の解説は次の記事が参考になります．&lt;br&gt;
+&lt;a class="link" href="https://info.atcoder.jp/entry/algorithm_lectures/color_coding" target="_blank" rel="noopener"
+&gt;AtCoder Algorithm Lectures. Color-Coding.&lt;/a&gt;&lt;br&gt;
+&lt;a class="link" href="https://lealgorithm.blogspot.com/2018/11/color-coding.html" target="_blank" rel="noopener"
+&gt;Le Algorithm. color-codingと脱乱択化.&lt;/a&gt;&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;Williams, Ryan. &amp;ldquo;Finding paths of length $k$ in $O^*(2^k)$ time.&amp;rdquo; Information Processing Letters 109.6 (2009): 315-318.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:3"&gt;
+&lt;p&gt;Björklund, Andreas, et al. &amp;ldquo;Narrow sieves for parameterized paths and packings.&amp;rdquo; Journal of Computer and System Sciences 87 (2017): 119-139.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description></item><item><title>AGC005-D ~K Perm Counting $O(N \log N)$ 時間解法</title><link>https://rogi52.github.io/blog/posts/agc005-d/</link><pubDate>Wed, 21 Jan 2026 22:56:00 +0900</pubDate><guid>https://rogi52.github.io/blog/posts/agc005-d/</guid><description>&lt;h2 id="概要"&gt;概要
 &lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://atcoder.jp/contests/agc005/tasks/agc005_d" target="_blank" rel="noopener"
 &gt;AGC005 D ~K Perm Counting&lt;/a&gt;
 を $O(N \log N)$ 時間で解く方法を解説します．

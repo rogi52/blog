@@ -11,6 +11,21 @@
 }
 
 /* =========================================
+   コードブロック (pre) のデザイン調整
+   ========================================= */
+.article-content pre {
+    font-size: 13.5px !important; /* 本文(15px)より少し小さくする。13〜14pxがおすすめ */
+    line-height: 1.5 !important;  /* 本文(1.75)より行間を詰めて、コードのまとまり感を出す */
+    border-radius: 6px !important;/* 角を少し丸める（お好みで） */
+}
+
+/* テーマによっては pre の中の code タグが独自のサイズを持っていることがあるので、親(pre)に従わせる */
+.article-content pre code {
+    font-size: inherit !important; 
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+}
+
+/* =========================================
    AtCoder風 カスタムボックス (.custom-callout)
    ========================================= */
 .custom-callout {
@@ -47,6 +62,30 @@
     outline: none;
     list-style-position: inside; 
     transition: filter 0.2s ease; /* ふわっと明るくするためのアニメーション */
+
+    display: flex;       /* アイコンと文字を綺麗に横並びにする */
+    align-items: center; /* 縦の真ん中に揃える */
+    list-style: none;    /* 標準の黒い三角を消す（Chrome, Edge等） */
+}
+
+/* 標準の黒い三角を消す（Safari等） */
+.custom-callout summary::-webkit-details-marker {
+    display: none;
+}
+
+/* ▼ 新しく ▶️ を追加する ▼ */
+.custom-callout summary::before {
+    content: "▶︎";
+    display: inline-block;
+    margin-right: 0.6em;             /* テキストとの隙間 */
+    /* font-size: 0.85em;               少し小さくするとタイトルと馴染みます */
+    font-size: 1em;
+    transition: transform 0.2s ease; /* クルッと回るアニメーション設定 */
+}
+
+/* ▼ 開いた時（open属性がついた時）は 90度回転させる ▼ */
+.custom-callout[open] summary::before {
+    transform: rotate(90deg);
 }
 
 /* ⬇︎ summaryにマウスが乗った時、親要素(custom-callout)全体の明るさを変える ⬇︎ */
@@ -70,6 +109,8 @@
 .custom-callout.box-red    { --box-color: #d9534f; --box-bg: rgba(217, 83, 79, 0.05); }
 .custom-callout.box-purple { --box-color: #8e44ad; --box-bg: rgba(142, 68, 173, 0.05); }
 .custom-callout.box-teal   { --box-color: #009688; --box-bg: rgba(0, 150, 136, 0.05); }
+.custom-callout.box-orange { --box-color: #e67e22; --box-bg: rgba(230, 126, 34, 0.05); }
+.custom-callout.box-indigo { --box-color: #3f51b5; --box-bg: rgba(63, 81, 181, 0.05); }
 
 /* =========================================
    ダークモード時の調整
@@ -84,6 +125,8 @@
 [data-scheme="dark"] .custom-callout.box-red    { --box-color: #f56c6c; --box-bg: rgba(245, 108, 108, 0.15); }
 [data-scheme="dark"] .custom-callout.box-purple { --box-color: #c38ef1; --box-bg: rgba(195, 142, 241, 0.15); }
 [data-scheme="dark"] .custom-callout.box-teal   { --box-color: #4db6ac; --box-bg: rgba(77, 182, 172, 0.15); }
+[data-scheme="dark"] .custom-callout.box-orange { --box-color: #eb8f34; --box-bg: rgba(235, 143, 52, 0.15); }
+[data-scheme="dark"] .custom-callout.box-indigo { --box-color: #7986cb; --box-bg: rgba(121, 134, 203, 0.15); }
 
 /* ダークモード時の文字色継承 */
 [data-scheme="dark"] .custom-callout > div,
@@ -92,6 +135,22 @@
     color: white !important;
 }
 
+/* --- カスタムボックスのタイトル内のリンクを特別扱い --- */
+.custom-callout strong:first-child a,
+.custom-callout summary a {
+    color: #ffffff !important;                     /* 文字色を白に */
+    text-decoration-color: #ffffff !important;     /* 標準の下線を白に */
+    
+    /* ▼ ここがポイント！アニメーションの青色設定を「白（RGB: 255, 255, 255）」で上書き */
+    --link-background-color: 255, 255, 255 !important;
+}
+
+/* マウスを乗せた時（ホバー時）の挙動 */
+.custom-callout strong:first-child a:hover,
+.custom-callout summary a:hover {
+    color: #e2e8f0 !important;                     /* 少しだけ暗い白 */
+    text-decoration-color: #e2e8f0 !important;
+}
 
 /* =========================================
    URLリンク（青色 ＋ にゅっと出るアニメーション復活）
