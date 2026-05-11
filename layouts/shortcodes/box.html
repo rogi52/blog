@@ -1,6 +1,10 @@
 {{ $color := .Get "color" | default "blue" }}
 {{ $prefix := .Get "prefix" }}
 
+{{/* 1. 事前定義されている「いつもの色」のリスト */}}
+{{ $isDefaultColor := in (slice "blue" "purple" "yellow" "green" "red" "teal" "gray" "orange" "indigo") $color }}
+
+{{/* 2. プレフィックスの自動設定 */}}
 {{ if not $prefix }}
     {{ if eq $color "blue" }}{{ $prefix = "定理" }}{{ end }}
     {{ if eq $color "purple" }}{{ $prefix = "補題" }}{{ end }}
@@ -8,14 +12,32 @@
     {{ if eq $color "green" }}{{ $prefix = "例" }}{{ end }}
     {{ if eq $color "red" }}{{ $prefix = "注意" }}{{ end }}
     {{ if eq $color "teal" }}{{ $prefix = "問題" }}{{ end }}
+    {{ if eq $color "orange" }}{{ $prefix = "主張" }}{{ end }}
     {{ if not $prefix }}{{ $prefix = "Note" }}{{ end }}
 {{ end }}
 
-{{ .Page.Scratch.Add (printf "count_%s" $prefix) 1 }}
-{{ $count := .Page.Scratch.Get (printf "count_%s" $prefix) }}
+{{/* 3. ナンバリング（nonum="true" ならカウントしない） */}}
+{{ $countText := "" }}
+{{ if ne (.Get "numbering") "false" }}
+    {{ .Page.Scratch.Add (printf "count_%s" $prefix) 1 }}
+    {{ $count := .Page.Scratch.Get (printf "count_%s" $prefix) }}
+    {{ $countText = printf "【%s %d】" $prefix $count }}
+{{ else }}
+    {{ $countText = printf "【%s】" $prefix }}
+{{ end }}
 
-<div {{ with .Get "id" }}id="{{ . }}"{{ end }} class="custom-callout box-{{ $color }}">
-    <strong>【{{ $prefix }} {{ $count }}】{{ with .Get "title" }} {{ . }}{{ end }}</strong>
+{{/* 4. 出力部分 */}}
+<div {{ with .Get "id" }}id="{{ . }}"{{ end }} 
+     class="custom-callout {{ if $isDefaultColor }}box-{{ $color }}{{ end }}"
+     {{/* 独自色の場合は、インラインで色と背景色（10%の薄さ）を直接指定する */}}
+     {{ if not $isDefaultColor }}style="--box-color: {{ $color }}; --box-bg: color-mix(in srgb, {{ $color }} 10%, transparent);"{{ end }}>
+    
+    {{/* タイトルか番号がある時だけ、上の色付き帯を出す */}}
+    {{ $title := .Get "title" }}
+    {{ if or $countText $title }}
+        <strong>{{ $countText }}{{ with $title }} {{ . | markdownify  }}{{ end }}</strong>
+    {{ end }}
+    
     <div>
         {{ .Inner | markdownify }}
     </div>

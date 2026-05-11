@@ -9,7 +9,7 @@ theme = 'hugo-theme-stack'
   twitter = "rogi_52"
 
 [params]
-  mainSections = ["posts"]
+  mainSections = ["posts", "complexity-theory", "additive-combinatorics", "single"]
 
     [params.sidebar]
         name = "Rogi"
@@ -36,8 +36,8 @@ theme = 'hugo-theme-stack'
     [[params.widgets.page]]
         type = "toc"
 
-    [[params.widgets.homepage]]
-        type = "profile"
+    # [[params.widgets.homepage]]
+    #   type = "profile"
 
     # [[params.widgets.homepage]]
     # type = "archives"
