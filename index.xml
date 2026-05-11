@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Home on Rogi</title><link>https://rogi52.github.io/blog/</link><description>Recent content in Home on Rogi</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Mon, 11 May 2026 16:15:13 +0000</lastBuildDate><atom:link href="https://rogi52.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>アーカイブ</title><link>https://rogi52.github.io/blog/archives/</link><pubDate>Mon, 11 May 2026 16:15:13 +0000</pubDate><guid>https://rogi52.github.io/blog/archives/</guid><description/></item><item><title>$k$-$\mathsf{PATH}$ を $2^k \cdot n^{O(1)}$ 時間で解くアルゴリズムを学ぶ</title><link>https://rogi52.github.io/blog/posts/kpath/</link><pubDate>Thu, 07 May 2026 20:06:30 +0900</pubDate><guid>https://rogi52.github.io/blog/posts/kpath/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Home on Rogi</title><link>https://rogi52.github.io/blog/</link><description>Recent content in Home on Rogi</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Mon, 11 May 2026 16:27:19 +0000</lastBuildDate><atom:link href="https://rogi52.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>アーカイブ</title><link>https://rogi52.github.io/blog/archives/</link><pubDate>Mon, 11 May 2026 16:27:19 +0000</pubDate><guid>https://rogi52.github.io/blog/archives/</guid><description/></item><item><title>$k$-$\mathsf{PATH}$ を $2^k \cdot n^{O(1)}$ 時間で解くアルゴリズムを学ぶ</title><link>https://rogi52.github.io/blog/posts/kpath/</link><pubDate>Thu, 07 May 2026 20:06:30 +0900</pubDate><guid>https://rogi52.github.io/blog/posts/kpath/</guid><description>
 &lt;div id="prob-label"
 class="custom-callout box-teal"
 &gt;
@@ -82,7 +82,7 @@ $0$ と $1$ の割り当て $2^k$ 通りに対して，
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id="fn:1"&gt;
-&lt;p&gt;Color-Coding の解説は次の記事が参考になります．&lt;br&gt;
+&lt;p&gt;Color-Coding は次の記事が参考になります．&lt;br&gt;
 &lt;a class="link" href="https://info.atcoder.jp/entry/algorithm_lectures/color_coding" target="_blank" rel="noopener"
 &gt;AtCoder Algorithm Lectures. Color-Coding.&lt;/a&gt;&lt;br&gt;
 &lt;a class="link" href="https://lealgorithm.blogspot.com/2018/11/color-coding.html" target="_blank" rel="noopener"
