@@ -98,7 +98,7 @@ $0$ と $1$ の割り当て $2^k$ 通りに対して，
 
 
 
-[^1]: Color-Coding の解説は次の記事が参考になります．  
+[^1]: Color-Coding は次の記事が参考になります．  
 [AtCoder Algorithm Lectures. Color-Coding.](https://info.atcoder.jp/entry/algorithm_lectures/color_coding)  
 [Le Algorithm. color-codingと脱乱択化.](https://lealgorithm.blogspot.com/2018/11/color-coding.html)
 
